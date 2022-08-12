@@ -2,6 +2,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:mentalhealthappui/screens/Widgets/emotion_face.dart';
@@ -17,6 +18,8 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
+  static const channel = MethodChannel("unique_name");
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -143,10 +146,18 @@ class _HomepageState extends State<Homepage> {
                 ),
                 child: Center(
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Row(
                         children: [],
-                      )
+                      ),
+                      ElevatedButton(
+                          style:
+                              ElevatedButton.styleFrom(primary: Colors.green),
+                          onPressed: () {
+                            _showToast();
+                          },
+                          child: Text("Press here to pay"))
                     ],
                   ),
                 ),
@@ -156,5 +167,10 @@ class _HomepageState extends State<Homepage> {
         ),
       ),
     );
+  }
+
+  Future<void> _showToast() async {
+    final int showToast = await channel.invokeMethod("showtoast",
+        <String, String>{"msg": "This is a toast msg from flutter"});
   }
 }
