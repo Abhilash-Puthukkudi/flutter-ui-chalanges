@@ -13,8 +13,14 @@ class MainActivity: FlutterActivity() {
         super.configureFlutterEngine(flutterEngine)
         channel = MethodChannel(flutterEngine.dartExecutor.binaryMessenger,CHANNEL)
         channel.setMethodCallHandler { call, result ->
+
+            var argument = call.arguments() as Map<String, String>?
+            var message = argument?.get("msg")
             if(call.method=="showtoast"){
-                Toast.makeText(this,"hey",Toast.LENGTH_LONG).show()
+
+
+
+                Toast.makeText(this,message.toString(),Toast.LENGTH_LONG).show()
             }
         }
     }

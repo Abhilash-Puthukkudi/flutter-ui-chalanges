@@ -170,7 +170,7 @@ class _HomepageState extends State<Homepage> {
   }
 
   Future<void> _showToast() async {
-    final int showToast = await channel.invokeMethod("showtoast",
-        <String, String>{"msg": "This is a toast msg from flutter"});
+    final int showToast = await channel.invokeMethod(
+        "showtoast", <String, String>{"msg": "Woow i can do it anything"});
   }
 }
